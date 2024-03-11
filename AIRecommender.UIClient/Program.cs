@@ -8,8 +8,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection.Emit;
-using System.Text;
+using System.Configuration;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace AIRecommender.UIClient
 {
@@ -19,7 +20,7 @@ namespace AIRecommender.UIClient
         {
             AIRecommendationEngine engine = new AIRecommendationEngine();
 
-            IList<Book> booksRecommended = engine.Recommend(new Preference { Age = 50, State = "new york", ISBN = "0060973129" }, 10); 
+            IList<Book> booksRecommended = engine.Recommend(new Preference { Age = 25, State = "new york", ISBN = "0060973129" }, 10); 
 
             if (booksRecommended.Count == 0)
             {
@@ -27,7 +28,7 @@ namespace AIRecommender.UIClient
                 return;
             }
             
-            Console.WriteLine("Recommended Books are: \n");
+            Console.WriteLine("\nRecommended Books are: \n");
             foreach (Book book in booksRecommended)
             {
                 Console.WriteLine($"{book.BookTitle} - {book.ISBN}");
@@ -38,19 +39,14 @@ namespace AIRecommender.UIClient
     public class AIRecommendationEngine
     {
         IRecommender aiRecommender;
-        IDataLoader loadData;
         public AIRecommendationEngine()
         {
             aiRecommender = new PearsonRecommender();
-            loadData = new CSVDataLoader();
-        }
-        public AIRecommendationEngine(IRecommender recommender, IDataLoader loader)
-        {
-            aiRecommender = recommender;
-            loadData = loader;
         }
         public IList<Book> Recommend(Preference preference, int limit)
         {
+            DataLoaderFactory factory = DataLoaderFactory.Instance;
+            IDataLoader loadData = factory.CreateDataLoader();
             BookDetails bookDetails = loadData.Load();
             //Console.WriteLine("loading done");
            

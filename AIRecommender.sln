@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIRecommender.CoreEngine", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIRecommender.CoreEngine.UnitTests", "AIRecommender.CoreEngine.UnitTests\AIRecommender.CoreEngine.UnitTests.csproj", "{DA25895C-F08E-4107-95B1-9322363B840E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIRecommender.DataCacher", "AIRecommender.DataCacher\AIRecommender.DataCacher.csproj", "{92660552-220B-428E-BB25-7E0072A8EEB3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{DA25895C-F08E-4107-95B1-9322363B840E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA25895C-F08E-4107-95B1-9322363B840E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA25895C-F08E-4107-95B1-9322363B840E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92660552-220B-428E-BB25-7E0072A8EEB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92660552-220B-428E-BB25-7E0072A8EEB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92660552-220B-428E-BB25-7E0072A8EEB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92660552-220B-428E-BB25-7E0072A8EEB3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +70,7 @@ Global
 		{A5BADFCC-32D3-4E60-AA66-C14CE8D52DF5} = {7C549EF5-27D4-423A-AE94-7DAB6C27F275}
 		{5C8259AD-F028-4DE0-BC60-4546BE5D69E2} = {7C549EF5-27D4-423A-AE94-7DAB6C27F275}
 		{DA25895C-F08E-4107-95B1-9322363B840E} = {7C549EF5-27D4-423A-AE94-7DAB6C27F275}
+		{92660552-220B-428E-BB25-7E0072A8EEB3} = {D158C57D-4EE2-4071-A032-0CBD6BBA8CF5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A69C1208-6FE4-4E2F-BE97-1EF2C3C2A697}

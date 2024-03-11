@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
+using System.Configuration;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -149,6 +149,18 @@ namespace AIRecommender.DataLoader
             bookDetails.Ratings = ratings;
 
             return bookDetails;
+        }
+    }
+    public class DataLoaderFactory
+    {
+        private DataLoaderFactory()
+        { }
+        public static readonly DataLoaderFactory Instance = new DataLoaderFactory();
+        public IDataLoader CreateDataLoader()
+        {
+            string className = ConfigurationManager.AppSettings["CSV"];
+            Type theType = Type.GetType(className);
+            return (IDataLoader)Activator.CreateInstance(theType);
         }
     }
 }
