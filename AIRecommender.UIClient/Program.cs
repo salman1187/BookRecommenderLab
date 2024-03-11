@@ -11,6 +11,7 @@ using System.Reflection.Emit;
 using System.Configuration;
 using System.Threading.Tasks;
 using System.Reflection;
+using AIRecommender.DataCacher;
 
 namespace AIRecommender.UIClient
 {
@@ -20,18 +21,33 @@ namespace AIRecommender.UIClient
         {
             AIRecommendationEngine engine = new AIRecommendationEngine();
 
-            IList<Book> booksRecommended = engine.Recommend(new Preference { Age = 25, State = "new york", ISBN = "0060973129" }, 10); 
+            while(true)
+            {
+                Console.WriteLine("Enter Age Preferece: ");
+                int age = int.Parse(Console.ReadLine());
+                Console.WriteLine("Enter State Preference: ");
+                string state = Console.ReadLine();
 
-            if (booksRecommended.Count == 0)
-            {
-                Console.WriteLine("No books to be recommended");
-                return;
-            }
-            
-            Console.WriteLine("\nRecommended Books are: \n");
-            foreach (Book book in booksRecommended)
-            {
-                Console.WriteLine($"{book.BookTitle} - {book.ISBN}");
+                Stopwatch sw = Stopwatch.StartNew();
+                IList<Book> booksRecommended = engine.Recommend(new Preference { Age = age, State = state, ISBN = "0060973129" }, 10);
+
+                if (booksRecommended.Count == 0)
+                {
+                    Console.WriteLine("No books to be recommended");
+                    return;
+                }
+
+                Console.WriteLine("\nRecommended Books are: \n");
+                foreach (Book book in booksRecommended)
+                {
+                    Console.WriteLine($"{book.BookTitle} - {book.ISBN}");
+                }
+                Console.WriteLine($"\n Time Taken: {sw.ElapsedMilliseconds}");
+
+                Console.WriteLine("Enter 0 to exit");
+                int flag = int.Parse(Console.ReadLine());
+                if (flag == 0)
+                    break;
             }
             
         }
@@ -45,9 +61,8 @@ namespace AIRecommender.UIClient
         }
         public IList<Book> Recommend(Preference preference, int limit)
         {
-            DataLoaderFactory factory = DataLoaderFactory.Instance;
-            IDataLoader loadData = factory.CreateDataLoader();
-            BookDetails bookDetails = loadData.Load();
+            BookDataService dataService = new BookDataService();
+            BookDetails bookDetails = dataService.GetBookDetails();
             //Console.WriteLine("loading done");
            
             //list of ratings of book in preference
@@ -96,7 +111,23 @@ namespace AIRecommender.UIClient
                     Console.WriteLine(bookCorrelation[s]);
                 }
             }
-            return ans; 
+            return ans;
+        }
+        public class BookDataService
+        {
+            public BookDetails GetBookDetails()
+            {
+                if(MemDataCacher.Instance.GetData() != null)
+                    return MemDataCacher.Instance.GetData();
+
+                DataLoaderFactory factory = DataLoaderFactory.Instance;
+                IDataLoader loadData = factory.CreateDataLoader();
+                BookDetails bookDetails = loadData.Load();
+
+                MemDataCacher.Instance.SetData(bookDetails);
+
+                return bookDetails;
+            }
         }
 
     }

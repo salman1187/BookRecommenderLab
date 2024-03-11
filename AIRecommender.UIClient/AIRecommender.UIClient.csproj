@@ -61,6 +61,10 @@
       <Project>{a5badfcc-32d3-4e60-aa66-c14ce8d52df5}</Project>
       <Name>AIRecommender.DataAggregator</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AIRecommender.DataCacher\AIRecommender.DataCacher.csproj">
+      <Project>{92660552-220b-428e-bb25-7e0072a8eeb3}</Project>
+      <Name>AIRecommender.DataCacher</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AIRecommender.DataLoader\AIRecommender.DataLoader.csproj">
       <Project>{a1b9482e-65d3-4855-a20b-a23fdfd5ebc7}</Project>
       <Name>AIRecommender.DataLoader</Name>

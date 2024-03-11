@@ -14,6 +14,8 @@ namespace AIRecommender.DataCacher
     }
     public class MemDataCacher : IDataCacher
     {
+        private MemDataCacher() { }
+        public static readonly MemDataCacher Instance = new MemDataCacher();
         public BookDetails data = null; 
         public BookDetails GetData()
         {
