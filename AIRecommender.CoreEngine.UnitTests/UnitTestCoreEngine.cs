@@ -42,8 +42,8 @@ namespace AIRecommender.CoreEngine.UnitTests
         [TestMethod]
         public void GetCorrelationTest_ValidInput_SmallerBase_ShouldGiveCorrectOutput()
         {
-            List<int> basearray = new List<int>() { 1, 2, 3, 4, 5};
-            List<int> otherarray = new List<int>() { 2, 4, 6, 8, 10, 12, 14 };
+            List<int> basearray = new List<int>() { 1, 2, 3, 4};
+            List<int> otherarray = new List<int>() { 2, 4, 6, 8, 10};
             double expected = 1;
             double actual = recommender.GetCorrelation(basearray, otherarray);
             Assert.AreEqual(expected, actual);

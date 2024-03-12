@@ -27,9 +27,10 @@ namespace AIRecommender.UIClient
                 int age = int.Parse(Console.ReadLine());
                 Console.WriteLine("Enter State Preference: ");
                 string state = Console.ReadLine();
-
+                Console.WriteLine("Enter ISBN Preference: ");
+                string isbn = Console.ReadLine();
                 Stopwatch sw = Stopwatch.StartNew();
-                IList<Book> booksRecommended = engine.Recommend(new Preference { Age = age, State = state, ISBN = "0060973129" }, 10);
+                IList<Book> booksRecommended = engine.Recommend(new Preference { Age = age, State = state, ISBN = isbn }, 10);
 
                 if (booksRecommended.Count == 0)
                 {
@@ -102,33 +103,16 @@ namespace AIRecommender.UIClient
             //but need to return the book and not the isbn :(
             Dictionary<string, Book> ISBNToBook = bookDetails.TheBooks.ToDictionary(book => book.ISBN);
             List<Book> ans = new List<Book>();
-            Console.WriteLine("FINAL BOOKS CORRELATION: ");
+            //Console.WriteLine("FINAL BOOKS CORRELATION: ");
             foreach (string s in  finalISBNlist)
             {
                 if(ISBNToBook.ContainsKey(s))
                 {
                     ans.Add(ISBNToBook[s]);
-                    Console.WriteLine(bookCorrelation[s]);
+                    //Console.WriteLine(bookCorrelation[s]);
                 }
             }
             return ans;
         }
-        public class BookDataService
-        {
-            public BookDetails GetBookDetails()
-            {
-                if(MemDataCacher.Instance.GetData() != null)
-                    return MemDataCacher.Instance.GetData();
-
-                DataLoaderFactory factory = DataLoaderFactory.Instance;
-                IDataLoader loadData = factory.CreateDataLoader();
-                BookDetails bookDetails = loadData.Load();
-
-                MemDataCacher.Instance.SetData(bookDetails);
-
-                return bookDetails;
-            }
-        }
-
     }
 }

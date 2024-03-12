@@ -29,7 +29,7 @@ namespace AIRecommender.DataAggregator
                 {
                     foreach (BookUserRating ratings in u.Ratings)
                     {
-                        // Check if the key exists in the dictionary before accessing it
+                        // Checking if the key exists in the dictionary before accessing it
                         if (!bookRatingList.ContainsKey(ratings.ISBN))
                         {
                             bookRatingList[ratings.ISBN] = new List<int>();

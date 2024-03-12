@@ -18,16 +18,12 @@ namespace AIRecommender.DataLoader
         public BookDetails Load()
         {
             BookDetails bookDetails = new BookDetails();
-            //Loading books
+            
             List<Book> books = LoadBooks();
 
-            //load bookuserratings
             List<BookUserRating> ratings = LoadRatings();
 
-            //load users
             List<User> users = LoadUsers();
-
-
 
             //linking Book and BookUserRating
             // Create a dictionary to store books by their ISBN

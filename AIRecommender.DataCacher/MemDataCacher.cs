@@ -1,9 +1,11 @@
 ﻿using AIRecommender.Entities;
+using StackExchange.Redis;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using ServiceStack.Redis;
 
 namespace AIRecommender.DataCacher
 {
@@ -26,4 +28,16 @@ namespace AIRecommender.DataCacher
             data = bookDetails; 
         }
     }
+    //public class RedisDataCacher : IDataCacher
+    //{
+    //    private static readonly RedisClient redisClient = new RedisClient("localhost");
+    //    public BookDetails GetData()
+    //    {
+    //        return redisClient.Get<BookDetails>("BookDetails");
+    //    }
+    //    public void SetData(BookDetails bookDetails)
+    //    {
+    //        redisClient.Set("BookDetails", bookDetails);
+    //    }
+    //}
 }
